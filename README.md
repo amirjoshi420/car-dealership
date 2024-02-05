@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Person 1 - Abrahim Abdulkader
+* Person 2 - Amir Joshi
 
 ## Design
 
