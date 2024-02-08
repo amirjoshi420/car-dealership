@@ -10,14 +10,14 @@ class AutomobileVO(models.Model):
 class SalesPerson(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    employee_id = models.CharField(max_length=3, unique=True)
+    employee_id = models.CharField(max_length=50, unique=True)
 
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=10)
+    phone_number = models.CharField(max_length=100)
 
 
 class Sale(models.Model):
