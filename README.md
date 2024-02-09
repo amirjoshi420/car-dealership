@@ -437,3 +437,221 @@ Delete the application must provide specific id
 
 
 
+# Sales Microservice
+
+On the backend, the sales microservice has 4 models: AutomobileVO, Customer, SalesPerson, and SalesRecord. SalesRecord is the model that interacts with the other three models. This model gets data from the three other models.
+
+The AutomobileVO is a value object that gets data about the automobiles in the inventory using a poller. The sales poller automotically polls the inventory microservice for data, so the sales microservice is constantly getting the updated data.
+
+The reason for integration between these two microservices is that when recording a new sale, you'll need to choose which car is being sold and that information lives inside of the inventory microservice.
+
+
+## Accessing Endpoints to Send and View Data - Access through Insomnia:
+
+### Customers:
+
+
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List customers | GET | http://localhost:8090/api/customers/
+| Create a customer | POST | http://localhost:8090/api/customers/
+| Show a specific customer | GET | http://localhost:8090/api/customers/id/
+
+To create a Customer (SEND THIS JSON BODY):
+```
+{
+    "first_name": "Mohamed",
+    "last_name": "Abdulkarim",
+    "address": "123 Bowling Street",
+    "phone_number": "6462069260"
+}
+```
+Return Value of Creating a Customer:
+```
+{
+    "first_name": "Mohamed",
+    "last_name": "Abdulkarim",
+    "address": "123 Bowling Street",
+    "phone_number": "6462069260"
+}
+```
+Return value of Listing all Customers:
+```
+[
+    {
+        "id": 1,
+        "first_name": "Abrahim",
+        "last_name": "Abdulkader",
+        "address": "123 Bowling Street",
+        "phone_number": "6462069260"
+    },
+    {
+        "id": 2,
+        "first_name": "Abrahim",
+        "last_name": "Abdulkader",
+        "address": "123 Bowling Street",
+        "phone_number": "6462069260"
+    },
+    {
+        "id": 3,
+        "first_name": "Abrahim",
+        "last_name": "Abdulkader",
+        "address": "123 Bowling Street",
+        "phone_number": "6462069260"
+    },
+    {
+        "id": 4,
+        "first_name": "Abrahim",
+        "last_name": "Abdulkader",
+        "address": "123 Bowling Street",
+        "phone_number": "6462069260"
+    },
+    {
+        "id": 5,
+        "first_name": "Mohamed",
+        "last_name": "Abdulkarim",
+        "address": "123 Bowling Street",
+        "phone_number": "6462069260"
+    }
+]
+```
+### Salespeople:
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List salespeople | GET | http://localhost:8090/api/salespeople/
+| Salesperson details | GET | http://localhost:8090/api/salesperson/id/
+| Create a salesperson | POST | http://localhost:8090/api/salespeople/
+| Delete a salesperson | DELETE | http://localhost:8090/api/salesperson/id/
+
+
+To create a salesperson (SEND THIS JSON BODY):
+```
+{
+    "first_name": "Kevin",
+    "last_name": "Durant",
+    "employee_id": "4"
+}
+```
+Return Value of creating a salesperson:
+```
+{
+    "salesperson": [
+        {
+            "id": 10,
+            "first_name": "Kevin",
+            "last_name": "Durant",
+            "employee_id": "4"
+        }
+    ]
+}
+```
+List all salespeople Return Value:
+```
+{
+    "salesperson": [
+        {
+            "id": 10,
+            "first_name": "Kevin",
+            "last_name": "Durant",
+            "employee_id": "4"
+        }
+    ]
+}
+```
+### Salesrecords:
+- the id value to show a salesperson's salesrecord is the **"id" value tied to a salesperson.**
+
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List all salesrecords | GET | http://localhost:8090/api/salesrecords/
+| Create a new sale | POST | http://localhost:8090/api/salesrecords/
+| Show salesperson's salesrecords | GET | http://localhost:8090/api/salesrecords/id/
+List all Salesrecords Return Value:
+```
+{
+    "sales": [
+        {
+            "id": 1,
+            "price": 111000,
+            "vin": {
+                "vin": "111"
+            },
+            "salesperson": {
+                "id": 1,
+                "name": "Liz",
+                "employee_number": 1
+            },
+            "customer": {
+                "name": "Martha Stewart",
+                "address": "1313 Baker Street",
+                "phone_number": "980720890"
+            }
+        }
+    ]
+}
+```
+Create a New Sale (SEND THIS JSON BODY):
+```
+{
+    "automobile": "1045NGONCA800613",
+    "salesperson": 10,
+    "customer": 5,
+    "price": "10"
+
+}
+
+```
+Return Value of Creating a New Sale:
+```
+{
+    "sales": [
+        {
+            "id": 23,
+            "automobile": {
+                "id": 2,
+                "vin": "1045NGONCA800613",
+                "sold": false
+            },
+            "salesperson": {
+                "id": 10,
+                "first_name": "Kevin",
+                "last_name": "Durant",
+                "employee_id": "4"
+            },
+            "customer": {
+                "id": 5,
+                "first_name": "Mohamed",
+                "last_name": "Abdulkarim",
+                "address": "123 Bowling Street",
+                "phone_number": "6462069260"
+            },
+            "price": 10
+        }
+    ]
+}
+```
+Show a Salesperson's Salesrecord Return Value:
+```
+{
+    "id": 1,
+    "price": 111000,
+    "vin": {
+        "vin": "111"
+    },
+    "salesperson": {
+        "id": 1,
+        "name": "Liz",
+        "employee_number": 1
+    },
+    "customer": {
+        "id",
+        "name": "Martha Stewart",
+        "address": "1313 Baker Street",
+        "phone_number": "980720890"
+    }
+}
+```
+
+
+
+
