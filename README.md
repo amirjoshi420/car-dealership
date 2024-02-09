@@ -2,6 +2,8 @@
 
 CarCar is an application for managing the aspects of an automobile dealership. It manages the inventory, automobile sales, and automobile services.
 
+CarCar is an application for managing the aspects of an automobile dealership. It manages the inventory, automobile sales, and automobile services.
+
 Team:
 
 * **Abrahim Abdulkader** - Auto Sales

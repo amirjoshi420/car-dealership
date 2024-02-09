@@ -35,14 +35,11 @@ class CustomerListEncoder(ModelEncoder):
         "phone_number"
     ]
 
-class SalesListEncoder(ModelEncoder):
-    model = Sale
+class SemiCustomerListEncoder(ModelEncoder):
+    model = Customer
     properties = [
-        "id",
-        "automobile",
-        "salesperson",
-        "customer",
-        "price"
+        "first_name",
+        "last_name"
     ]
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -52,6 +49,26 @@ class AutomobileVOEncoder(ModelEncoder):
         "vin",
         "sold"
     ]
+
+class SalesListEncoder(ModelEncoder):
+    model = Sale
+    properties = [
+        "id",
+        "automobile",
+        "salesperson",
+        "customer",
+        "price",
+    ]
+
+    # def get_extra_data(self, o):
+    #     return {"customer": o.customer.first_name + "" +o.customer.last_name}
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+        "salesperson": SalesPersonListEncoder(),
+        "customer": CustomerListEncoder()
+    }
+
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_salesperson(request):
@@ -140,14 +157,16 @@ def api_list_sales(request):
     if request.method == "GET":
         sales = Sale.objects.all()
         return JsonResponse(
-            {"sales": list(sales.values())},
+            {"sales": sales},
             encoder=SalesListEncoder,
             safe=False
         )
-    else:
 
+    else:
+        print("Hi")
         try:
             content = json.loads(request.body)
+            print(content)
 
             automobile_id = content.get('automobile')
             salesperson_id = content.get('salesperson')
