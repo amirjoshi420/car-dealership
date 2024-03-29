@@ -17,15 +17,18 @@ import TechnicianForm from './TechniciansForm.js'
 import AppointmentForm from './AppointmentForm.js'
 import AppointmentList from './AppointmentList.js';
 import ServiceHistory from './ServiceHistory.js';
+import Footer from './Footer.js';
 
 import SalesList from './ListSales.js'
 import RecordSale from './AddSale.js'
 // import SalespersonHistory from './SalesHistory.js';
+document.body.style.backgroundColor = "#e5e5e5";
 
 function App() {
   return (
     <BrowserRouter>
       <Nav />
+      <Footer />
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />

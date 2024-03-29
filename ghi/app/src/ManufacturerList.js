@@ -18,30 +18,32 @@ function ManufacturerList() {
     getData()
   }, []);
 
-  return (
-    <div className="my-5 container">
-      <div className="row">
-        <h1>Manufacturers</h1>
+return (
+  
+    <div style={{ backgroundColor: "#6c757d" }}> {/* Set background color for the entire page */}
+      <div className="my-5 container" style={{ backgroundColor: "#ffffff" }}> {/* Set background color for the container */}
+        <div className="row">
+          <h1>Manufacturers</h1>
 
-        <table className="table table-striped m-3">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {names.map(name => {
-              return (
-                <tr key={name.id}>
-                  <td>{ name.name }</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+          <table className="table table-striped m-3">
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {names.map(name => {
+                return (
+                  <tr key={name.id}>
+                    <td>{ name.name }</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
-}
-
+            }
 export default ManufacturerList;
